@@ -1,0 +1,29 @@
+{
+  "name": "gestigris-common",
+  "version": "0.0.1",
+  "author": "leseulsteve@gmail.com",
+  "engines": {
+    "node": "0.12",
+    "npm": "2.7"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.0",
+    "grunt-angular-templates": "^1.0.3",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-jsbeautifier": "^0.2.12",
+    "grunt-newer": "^1.1.2",
+    "grunt-ng-annotate": "^2.0.1",
+    "grunt-prettysass": "^0.2.3",
+    "grunt-rev": "^0.1.0",
+    "grunt-scss-lint": "^0.3.8",
+    "jit-grunt": "^0.10.0",
+    "jshint-stylish": "^2.1.0"
+  }
+}

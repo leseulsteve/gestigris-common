@@ -1,0 +1,20 @@
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+[ng-click],
+[ui-sref] {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: none;
+}
+
+md-icon:focus {
+  outline: 0;
+}
