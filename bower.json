@@ -5,6 +5,19 @@
     "./dist/gestigris-common.js",
     "./dist/gestigris-common.css",
   ],
+  "ignore": [
+    "package.json",
+    "Gruntfile.js",
+    ".jshintignore",
+    ".gitignore",
+    ".gitattributes",
+    ".editorconfig",
+    ".bowerrc",
+    ".scss-lint.yml",
+    ".jshintrc",
+    ".jsbeautifyrc",
+    "app/"
+  ],
   "dependencies": {
     "angular-sanitize": "~1.4.5",
     "angular-ui-router": "~0.2.15",
