@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": [
     "./dist/gestigris-common.js",
-    "./dist/gestigris-common.css",
+    "./dist/gestigris-common.css"
   ],
   "ignore": [
     "package.json",
