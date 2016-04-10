@@ -110,14 +110,6 @@ module.exports = function (grunt) {
           dest: '<%= paths.dist %>/icons'
         }]
       },
-      images: {
-        files: [{
-          expand: true,
-          cwd: '<%= paths.app %>/img',
-          src: '**',
-          dest: '<%= paths.dist %>/img'
-        }]
-      },
       fonts: {
         files: [{
           expand: true,
@@ -132,6 +124,17 @@ module.exports = function (grunt) {
           cwd: '<%= paths.app %>/translations',
           src: '**',
           dest: '<%= paths.dist %>/translations'
+        }]
+      }
+    },
+
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= paths.app %>/img',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= paths.dist %>/img'
         }]
       }
     },
@@ -204,7 +207,7 @@ module.exports = function (grunt) {
     'sass:dist',
     'ngAnnotate:dist',
     'copy:icons',
-    'copy:images',
+    'imagemin:dist',
     'copy:fonts',
     'copy:translations',
     'rev:dist',
