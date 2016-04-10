@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').config(
+angular.module('gestigris-common').config(
   function ($urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core')
+angular.module('gestigris-common')
   .config(function ($translateProvider) {
 
     //$translateProvider.useSanitizeValueStrategy('sanitize');

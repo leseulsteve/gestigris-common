@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').service('Moment',
+angular.module('gestigris-common').service('Moment',
   function () {
     return moment;
   });

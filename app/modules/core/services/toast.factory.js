@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').service('Toast',
+angular.module('gestigris-common').service('Toast',
   function ($mdMedia, $mdToast) {
 
     var Toast = function (params) {

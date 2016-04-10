@@ -14,7 +14,7 @@ angular.module('gestigris-common', [
 
 'use strict';
 
-angular.module('core').config(
+angular.module('gestigris-common').config(
   ['$urlRouterProvider', '$httpProvider', function ($urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');
@@ -42,7 +42,7 @@ angular.module('core').config(
 
 'use strict';
 
-angular.module('core')
+angular.module('gestigris-common')
   .config(['$translateProvider', function ($translateProvider) {
 
     //$translateProvider.useSanitizeValueStrategy('sanitize');
@@ -57,14 +57,14 @@ angular.module('core')
 
 'use strict';
 
-angular.module('core').service('Moment',
+angular.module('gestigris-common').service('Moment',
   function () {
     return moment;
   });
 
 'use strict';
 
-angular.module('core').service('Toast',
+angular.module('gestigris-common').service('Toast',
   ['$mdMedia', '$mdToast', function ($mdMedia, $mdToast) {
 
     var Toast = function (params) {
@@ -87,7 +87,7 @@ angular.module('core').service('Toast',
 
 'use strict';
 
-angular.module('core')
+angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
       .iconSet('action', 'icons/99632812.action-icons.svg', 24)
