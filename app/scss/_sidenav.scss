@@ -1,0 +1,13 @@
+sidenav {
+  md-toolbar, md-toolbar {
+    md-icon {
+      color: #fff !important;
+    }
+  }
+
+  md-list {
+    .md-button {
+      margin: 0;
+    }
+  }
+}

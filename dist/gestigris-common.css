@@ -60,3 +60,8 @@ input {
 
 md-icon:focus {
   outline: 0; }
+
+sidenav md-toolbar md-icon, sidenav md-toolbar md-icon {
+  color: #fff !important; }
+sidenav md-list .md-button {
+  margin: 0; }
