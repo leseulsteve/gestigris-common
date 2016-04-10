@@ -65,3 +65,17 @@ sidenav md-toolbar md-icon, sidenav md-toolbar md-icon {
   color: #fff !important; }
 sidenav md-list .md-button {
   margin: 0; }
+
+.layout-bg {
+  background-color: #f5f5f5; }
+
+.filter-bar md-input-container {
+  margin: 0; }
+  .filter-bar md-input-container .md-errors-spacer {
+    display: none; }
+
+.card-list md-list {
+  padding: 0; }
+
+md-list-item.active {
+  background-color: rgba(158, 158, 158, 0.2); }
