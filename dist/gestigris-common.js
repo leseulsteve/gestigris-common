@@ -28,7 +28,7 @@ angular.module('gestigris-common').config(
 
               route = config.url.split('/')[config.url.split('/').length - 2];
 
-            if (!_.contains(['img', 'icons', '/'], route)) {
+            if (!_.contains(['img', 'icons', '/'], route) && !_.endsWith(config.url, 'md-close.svg') && !_.endsWith(config.url, 'md-tabs-arrow.svg')) {
               urlPrefix += '/api/v1';
               config.url = urlPrefix + '/' + config.url;
             }
@@ -80,6 +80,7 @@ angular.module('gestigris-common')
 
 angular.module('gestigris-common').service('Moment',
   function () {
+    moment.locale('ca-fr');
     return moment;
   });
 
@@ -111,22 +112,22 @@ angular.module('gestigris-common').service('Toast',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/99632812.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3d062121.alert-icons.svg', 24)
-      .iconSet('av', 'icons/12727965.av-icons.svg', 24)
-      .iconSet('communication', 'icons/14a6ec88.communication-icons.svg', 24)
-      .iconSet('content', 'icons/d73de9e3.content-icons.svg', 24)
-      .iconSet('device', 'icons/98f8d921.device-icons.svg', 24)
-      .iconSet('editor', 'icons/bbf5607a.editor-icons.svg', 24)
-      .iconSet('file', 'icons/96f6b24b.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/90548e26.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
+      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
+      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
+      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
+      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
+      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
+      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/a0577dd0.image-icons.svg', 24)
-      .iconSet('maps', 'icons/ea99afd9.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/9edaa8f8.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/80d43d2a.notification-icons.svg', 24)
-      .iconSet('social', 'icons/39ce2056.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/a0cd50cd.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
+      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
+      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
   }]);
 
 'use strict';
