@@ -4,6 +4,7 @@ module.exports = function (grunt) {
 
   require('jit-grunt')(grunt, {
     scsslint: 'grunt-scss-lint',
+    ngtemplates: 'grunt-angular-templates'
   });
 
   var gruntConfig = {
@@ -97,6 +98,27 @@ module.exports = function (grunt) {
         expand: true,
         files: {
           '<%= paths.dist %>/gestigris-common.js': ['<%= paths.app %>/app.js', '<%= paths.app %>/modules/*.js', '<%= paths.app %>/modules/**/*.js']
+        }
+      }
+    },
+
+    ngtemplates: {
+      dist: {
+        src: '<%= paths.app %>/modules/**/views/*.html',
+        dest: '<%= paths.dist %>/gestigris-common.js',
+        options: {
+          module: 'gestigris-common',
+          htmlmin: {
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            removeComments: true,
+            removeEmptyAttributes: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+          },
+          append: true
         }
       }
     },
@@ -214,6 +236,7 @@ module.exports = function (grunt) {
     'usemin',
     'autoprefixer:dist',
     'cssmin:dist',
+    'ngtemplates:dist',
     'uglify:dist',
     'clean:postDist'
   ]);

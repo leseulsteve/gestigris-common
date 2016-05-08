@@ -229,3 +229,11 @@ angular.module('gestigris-common').directive('avatar',
       }
     };
   }]);
+angular.module('gestigris-common').run(['$templateCache', function($templateCache) {
+  'use strict';
+
+  $templateCache.put('app/modules/theme/views/avatar.html',
+    "<div layout=row layout-align=\"center center\"><md-icon ng-if=!hasImage md-svg-icon=action:face class=md-avatar alt=user.toString()><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></md-icon><span ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></span></div>"
+  );
+
+}]);
