@@ -1,0 +1,33 @@
+.crop-area {
+  background: #e4e4e4;
+  overflow: hidden;
+  width: 500px;
+  height: 350px;
+}
+
+avatar {
+  img {
+    border-radius: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    margin: 10px !important;
+  }
+
+  md-icon {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 5px !important;
+  }
+
+  &.profile {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    md-icon {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
