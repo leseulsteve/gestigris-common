@@ -104,7 +104,8 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       dist: {
-        src: '<%= paths.app %>/modules/**/views/*.html',
+        cwd: '<%= paths.app %>',
+        src: 'modules/**/views/*.html',
         dest: '<%= paths.dist %>/gestigris-common.js',
         options: {
           module: 'gestigris-common',
