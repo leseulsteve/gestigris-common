@@ -7,7 +7,7 @@ angular.module('gestigris-common').directive('avatar',
       scope: {
         user: '='
       },
-      templateUrl: 'modules/theme/views/avatar.html',
+      templateUrl: 'modules/users/views/avatar.html',
       compile: function (iElement, iAttrs) {
 
         if (!_.isUndefined(iAttrs.clickToUpdate)) {
