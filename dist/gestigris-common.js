@@ -109,25 +109,159 @@ angular.module('gestigris-common').service('Toast',
 
 'use strict';
 
+angular.module('gestigris-common').directive('etablissementImage',
+  ['Etablissement', function (Etablissement) {
+
+    var etablissements = {};
+
+    return {
+      restrict: 'E',
+      templateUrl: 'modules/etablissements/views/etablissement.image.html',
+      link: function (scope, element, attrs) {
+
+        function setImage() {
+          scope.image = scope.etablissement.getImageUrl();
+          if (scope.image) {
+            var imageElement = element.find('img');
+            imageElement.bind('load', function () {
+              scope.$broadcast('imageLoaded');
+              scope.$apply();
+            });
+          } else {
+            scope.$broadcast('imageLoaded');
+          }
+        }
+
+        var unwatch = scope.$watch(attrs.etablissementId, function (etablissementId) {
+          if (!_.isUndefined(etablissementId)) {
+
+            scope.etablissement = etablissements[etablissementId];
+
+            if (_.isUndefined(scope.etablissement)) {
+              Etablissement.findById(etablissementId).then(function (etablissement) {
+                scope.etablissement = etablissement;
+                setImage();
+                etablissements[etablissementId] = etablissement;
+              });
+            } else {
+              setImage();
+            }
+
+            unwatch();
+          }
+        });
+
+        var unwatch2 = scope.$watch(attrs.etablissement, function (etablissement) {
+          if (!_.isUndefined(etablissement)) {
+
+            etablissements[etablissement._id] = etablissement;
+            scope.etablissement = etablissement;
+
+            setImage();
+
+            unwatch2();
+          }
+        });
+      }
+    };
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').directive('etablissementMap',
+  ['$timeout', 'leafletData', function ($timeout, leafletData) {
+    return {
+      restrict: 'E',
+      scope: true,
+      replace: true,
+      templateUrl: 'modules/etablissements/views/etablissement.map.html',
+      link: function (scope, element, attrs) {
+
+        var unwatch = scope.$watch(attrs.etablissement, function (etablissement) {
+          if (!_.isUndefined(etablissement)) {
+            angular.extend(scope, {
+              center: {
+                lat: etablissement.coordinates.lat,
+                lng: etablissement.coordinates.long,
+                zoom: 15
+              }
+            });
+            leafletData.getMap().then(function (map) {
+              $timeout(function () {
+                scope.markers = {
+                  etablissement: {
+                    lat: etablissement.coordinates.lat,
+                    lng: etablissement.coordinates.long,
+                    message: etablissement.address.street,
+                    focus: true,
+                    draggable: false
+                  }
+                };
+                map.invalidateSize();
+              });
+            });
+            unwatch();
+          }
+        });
+      }
+    };
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').factory('EtablissementType',
+  ['Schema', function (Schema) {
+
+    var EtablissementType = new Schema('etablissement-type');
+
+    EtablissementType.prototype.toString = function () {
+      return this.name;
+    };
+
+    return EtablissementType;
+
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').factory('Etablissement',
+  ['Schema', function (Schema) {
+
+    var Etablissement = new Schema('etablissement');
+
+    Etablissement.prototype.toString = function () {
+      return this.name;
+    };
+
+    Etablissement.prototype.getImageUrl = function () {
+      return this.imageUrl;
+    };
+
+    return Etablissement;
+
+  }]);
+
+'use strict';
+
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
-      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
-      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
-      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
-      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
-      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
-      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/action-icons.svg', 24)
+      .iconSet('alert', 'icons/alert-icons.svg', 24)
+      .iconSet('av', 'icons/av-icons.svg', 24)
+      .iconSet('communication', 'icons/communication-icons.svg', 24)
+      .iconSet('content', 'icons/content-icons.svg', 24)
+      .iconSet('device', 'icons/device-icons.svg', 24)
+      .iconSet('editor', 'icons/editor-icons.svg', 24)
+      .iconSet('file', 'icons/file-icons.svg', 24)
+      .iconSet('hardware', 'icons/hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
-      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
-      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/image-icons.svg', 24)
+      .iconSet('maps', 'icons/maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/notification-icons.svg', 24)
+      .iconSet('social', 'icons/social-icons.svg', 24)
+      .iconSet('toggle', 'icons/toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -231,11 +365,3 @@ angular.module('gestigris-common').directive('avatar',
       }
     };
   }]);
-angular.module('gestigris-common').run(['$templateCache', function($templateCache) {
-  'use strict';
-
-  $templateCache.put('modules/users/views/avatar.html',
-    "<div><md-icon ng-if=!hasImage md-svg-icon=action:face class=md-avatar alt=user.toString()><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></md-icon><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div></div>"
-  );
-
-}]);
