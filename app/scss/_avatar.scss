@@ -6,8 +6,9 @@
 }
 
 avatar {
-  display: block;
+  border: 2px solid #fff;
   border-radius: 50%;
+  display: block;
 
   div, img {
     border-radius: inherit;

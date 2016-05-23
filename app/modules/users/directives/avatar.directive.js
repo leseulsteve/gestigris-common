@@ -10,6 +10,8 @@ angular.module('gestigris-common').directive('avatar',
       templateUrl: 'modules/users/views/avatar.html',
       compile: function (iElement, iAttrs) {
 
+        iElement.addClass('md-whiteframe-3dp');
+
         if (!_.isUndefined(iAttrs.clickToUpdate)) {
           iElement.append('<input style="display:none;" type="file"/>');
           iElement.append('<div class="md-caption text-center">Cliquez pour changer</div>');

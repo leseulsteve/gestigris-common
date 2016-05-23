@@ -73,8 +73,9 @@ sidenav md-list .md-button {
   height: 350px; }
 
 avatar {
-  display: block;
-  border-radius: 50%; }
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: block; }
   avatar div, avatar img {
     border-radius: inherit; }
   avatar img {
