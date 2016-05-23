@@ -1,5 +1,5 @@
 <div>
-	<md-icon ng-if="!hasImage" md-svg-icon="action:face" class="md-avatar" alt="user.toString()">
+	<md-icon ng-if="!hasImage" md-svg-icon="action:face" alt="user.toString()">
  		<md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
 	</md-icon>
 	<div ng-if="hasImage">
