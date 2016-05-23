@@ -246,22 +246,22 @@ angular.module('gestigris-common').factory('Etablissement',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/action-icons.svg', 24)
-      .iconSet('alert', 'icons/alert-icons.svg', 24)
-      .iconSet('av', 'icons/av-icons.svg', 24)
-      .iconSet('communication', 'icons/communication-icons.svg', 24)
-      .iconSet('content', 'icons/content-icons.svg', 24)
-      .iconSet('device', 'icons/device-icons.svg', 24)
-      .iconSet('editor', 'icons/editor-icons.svg', 24)
-      .iconSet('file', 'icons/file-icons.svg', 24)
-      .iconSet('hardware', 'icons/hardware-icons.svg', 24)
+      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
+      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
+      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
+      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
+      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
+      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
+      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/image-icons.svg', 24)
-      .iconSet('maps', 'icons/maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/notification-icons.svg', 24)
-      .iconSet('social', 'icons/social-icons.svg', 24)
-      .iconSet('toggle', 'icons/toggle-icons.svg', 24);
+      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
+      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
+      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -365,3 +365,21 @@ angular.module('gestigris-common').directive('avatar',
       }
     };
   }]);
+angular.module('gestigris-common').run(['$templateCache', function($templateCache) {
+  'use strict';
+
+  $templateCache.put('modules/etablissements/views/etablissement.image.html',
+    "<img ng-show=image ng-src=\"{{ image }}\" alt=\"{{ etablissement.toString() }}\" style=height:200px><div ng-show=!image layout=column layout-align=\"center center\" style=height:200px><p class=md-headline style=\"text-align: center\">{{ etablissement.toString() }}</p></div>"
+  );
+
+
+  $templateCache.put('modules/etablissements/views/etablissement.map.html',
+    "<leaflet ng-if=center markers=markers lf-center=center></leaflet>"
+  );
+
+
+  $templateCache.put('modules/users/views/avatar.html',
+    "<div><md-icon ng-if=!hasImage md-svg-icon=action:face alt=user.toString()><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></md-icon><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div></div>"
+  );
+
+}]);
