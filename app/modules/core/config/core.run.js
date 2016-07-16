@@ -4,6 +4,7 @@ angular.module('gestigris-common').run(
   function ($rootScope, $mdMedia) {
 
     $rootScope.$mdMedia = $mdMedia;
+    $rootScope._ = window._;
 
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.error('$stateChangeError: ', toState, error);
