@@ -9,5 +9,6 @@ angular.module('gestigris-common', [
   'leseulsteve.angular-mongoose',
   'leseulsteve.angular-user-auth',
   'pascalprecht.translate',
+  'leaflet-directive',
   'btford.socket-io'
 ]);

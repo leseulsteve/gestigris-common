@@ -9,6 +9,7 @@ angular.module('gestigris-common', [
   'leseulsteve.angular-mongoose',
   'leseulsteve.angular-user-auth',
   'pascalprecht.translate',
+  'leaflet-directive',
   'btford.socket-io'
 ]);
 
@@ -50,6 +51,7 @@ angular.module('gestigris-common').run(
   ['$rootScope', '$mdMedia', function ($rootScope, $mdMedia) {
 
     $rootScope.$mdMedia = $mdMedia;
+    $rootScope._ = window._;
 
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.error('$stateChangeError: ', toState, error);
