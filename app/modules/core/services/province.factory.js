@@ -15,7 +15,7 @@ angular.module('gestigris-common').factory('Province',
       var deffered = $q.defer();
       deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb4df181',
-        nom: 'Québec'
+        name: 'Québec'
       }], function (params) {
         return new Province(params);
       }));

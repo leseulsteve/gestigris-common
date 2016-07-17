@@ -15,7 +15,7 @@ angular.module('gestigris-common').factory('Pays',
       var deffered = $q.defer();
       deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb4df182',
-        nom: 'Canada'
+        name: 'Canada'
       }], function (params) {
         return new Pays(params);
       }));
