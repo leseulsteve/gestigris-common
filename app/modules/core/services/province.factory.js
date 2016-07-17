@@ -13,7 +13,7 @@ angular.module('gestigris-common').factory('Province',
 
     Province.find = function () {
       var deffered = $q.defer();
-      deffered.resolve(_.maps([{
+      deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb4df181',
         nom: 'Québec'
       }], function (params) {

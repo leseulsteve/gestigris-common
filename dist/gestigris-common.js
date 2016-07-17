@@ -120,7 +120,7 @@ angular.module('gestigris-common').factory('Pays',
 
     Pays.find = function () {
       var deffered = $q.defer();
-      deffered.resolve(_.maps([{
+      deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb4df182',
         nom: 'Canada'
       }], function (params) {
@@ -148,7 +148,7 @@ angular.module('gestigris-common').factory('Province',
 
     Province.find = function () {
       var deffered = $q.defer();
-      deffered.resolve(_.maps([{
+      deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb4df181',
         nom: 'Québec'
       }], function (params) {
@@ -199,7 +199,7 @@ angular.module('gestigris-common').factory('Ville',
 
     Ville.find = function () {
       var deffered = $q.defer();
-      deffered.resolve(_.maps([{
+      deffered.resolve(_.map([{
         _id: '578bc96bd8916725bb5df181',
         nom: 'Ville de Québec'
       }], function (params) {
