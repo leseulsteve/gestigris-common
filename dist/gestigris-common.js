@@ -53,6 +53,10 @@ angular.module('gestigris-common').run(
     $rootScope.$mdMedia = $mdMedia;
     $rootScope._ = window._;
 
+    $rootScope.$on('$stateChangeSuccess', function () {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.error('$stateChangeError: ', toState, error);
     });
@@ -367,7 +371,7 @@ angular.module('gestigris-common')
 
 'use strict';
 
-angular.module('gestigris-common')
+angular.module('core')
   .config(['$mdThemingProvider', function ($mdThemingProvider) {
 
     var vertGris = $mdThemingProvider.extendPalette('green', {
@@ -386,11 +390,15 @@ angular.module('gestigris-common')
     $mdThemingProvider.definePalette('orangeGris', orangeGris);
     $mdThemingProvider.definePalette('redGris', redGris);
 
+    $mdThemingProvider.theme('default')
+      .primaryPalette('vertGris')
+      .accentPalette('orangeGris')
+      .warnPalette('redGris');
   }]);
 
 'use strict';
 
-angular.module('users')
+angular.module('gestigris-common')
   .config(['$stateProvider', function ($stateProvider) {
 
     $stateProvider.
@@ -405,7 +413,7 @@ angular.module('users')
 
 'use strict';
 
-angular.module('users').controller('LoginController',
+angular.module('gestigris-common').controller('LoginController',
   ['$scope', '$state', function ($scope, $state) {
 
     this.handleLogin = function (loginForm, credentials) {

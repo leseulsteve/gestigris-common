@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gestigris-common')
+angular.module('core')
   .config(function ($mdThemingProvider) {
 
     var vertGris = $mdThemingProvider.extendPalette('green', {
@@ -19,4 +19,8 @@ angular.module('gestigris-common')
     $mdThemingProvider.definePalette('orangeGris', orangeGris);
     $mdThemingProvider.definePalette('redGris', redGris);
 
+    $mdThemingProvider.theme('default')
+      .primaryPalette('vertGris')
+      .accentPalette('orangeGris')
+      .warnPalette('redGris');
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('LoginController',
+angular.module('gestigris-common').controller('LoginController',
   function ($scope, $state) {
 
     this.handleLogin = function (loginForm, credentials) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users')
+angular.module('gestigris-common')
   .config(function ($stateProvider) {
 
     $stateProvider.

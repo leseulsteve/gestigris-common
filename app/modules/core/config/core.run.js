@@ -6,6 +6,10 @@ angular.module('gestigris-common').run(
     $rootScope.$mdMedia = $mdMedia;
     $rootScope._ = window._;
 
+    $rootScope.$on('$stateChangeSuccess', function () {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.error('$stateChangeError: ', toState, error);
     });
