@@ -424,9 +424,10 @@ angular.module('gestigris-common')
 'use strict';
 
 angular.module('gestigris-common').controller('LoginController',
-  ['$scope', '$state', 'GESTIGRIS', function ($scope, $state, GESTIGRIS) {
+  ['$scope', '$state', 'APP', function ($scope, $state, APP) {
 
-    $scope.appName = GESTIGRIS.APPNAME;
+    $scope.appName = APP.name;
+    $scope.appVersion = APP.version;
 
     this.handleLogin = function (loginForm, credentials) {
       $scope.signin(loginForm, credentials);

@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('gestigris-common').controller('LoginController',
-  function ($scope, $state, GESTIGRIS) {
+  function ($scope, $state, APP) {
 
-    $scope.appName = GESTIGRIS.APPNAME;
+    $scope.appName = APP.name;
+    $scope.appVersion = APP.version;
 
     this.handleLogin = function (loginForm, credentials) {
       $scope.signin(loginForm, credentials);
