@@ -44,7 +44,7 @@ angular.module('gestigris-common').directive('etablissementImage',
           if (!_.isUndefined(etablissement)) {
 
             etablissements[etablissement._id] = etablissement;
-          //  scope.etablissement = etablissement;
+            //  scope.etablissement = etablissement;
 
             setImage();
 

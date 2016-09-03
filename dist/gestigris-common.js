@@ -237,7 +237,7 @@ angular.module('gestigris-common').directive('etablissementImage',
           }
         }
 
-        var unwatch = scope.$watch(attrs.etablissementId, function (etablissementId) {
+        scope.$watch(attrs.etablissementId, function (etablissementId) {
           if (!_.isUndefined(etablissementId)) {
 
             scope.etablissement = etablissements[etablissementId];
@@ -251,20 +251,17 @@ angular.module('gestigris-common').directive('etablissementImage',
             } else {
               setImage();
             }
-
-            unwatch();
           }
         });
 
-        var unwatch2 = scope.$watch(attrs.etablissement, function (etablissement) {
+        scope.$watch(attrs.etablissement, function (etablissement) {
           if (!_.isUndefined(etablissement)) {
 
             etablissements[etablissement._id] = etablissement;
-            scope.etablissement = etablissement;
+            //  scope.etablissement = etablissement;
 
             setImage();
 
-            unwatch2();
           }
         });
       }
@@ -274,7 +271,7 @@ angular.module('gestigris-common').directive('etablissementImage',
 'use strict';
 
 angular.module('gestigris-common').directive('etablissementMap',
-  ['$timeout', 'leafletData', function ($timeout, leafletData) {
+  function () {
     return {
       restrict: 'E',
       scope: true,
@@ -282,35 +279,34 @@ angular.module('gestigris-common').directive('etablissementMap',
       templateUrl: 'modules/etablissements/views/etablissement.map.html',
       link: function (scope, element, attrs) {
 
-        var unwatch = scope.$watch(attrs.etablissement, function (etablissement) {
-          if (!_.isUndefined(etablissement)) {
+        scope.$watch(attrs.etablissement, function (etablissement) {
+          if (!_.isUndefined(etablissement.coordinates)) {
             angular.extend(scope, {
               center: {
                 lat: etablissement.coordinates.lat,
                 lng: etablissement.coordinates.long,
                 zoom: 15
+              },
+              markers: {
+                etablissement: {
+                  lat: etablissement.coordinates.lat,
+                  lng: etablissement.coordinates.long,
+                  message: etablissement.address.street,
+                  focus: true,
+                  draggable: false
+                }
               }
             });
-            leafletData.getMap().then(function (map) {
-              $timeout(function () {
-                scope.markers = {
-                  etablissement: {
-                    lat: etablissement.coordinates.lat,
-                    lng: etablissement.coordinates.long,
-                    message: etablissement.address.street,
-                    focus: true,
-                    draggable: false
-                  }
-                };
-                map.invalidateSize();
+            /*leafletData.getMap().then(function(map) {
+              $timeout(function() {
+               // map.invalidateSize();
               });
-            });
-            unwatch();
+            });*/
           }
-        });
+        }, true);
       }
     };
-  }]);
+  });
 
 'use strict';
 
@@ -351,22 +347,22 @@ angular.module('gestigris-common').factory('Etablissement',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
-      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
-      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
-      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
-      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
-      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
-      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/99632812.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3d062121.alert-icons.svg', 24)
+      .iconSet('av', 'icons/12727965.av-icons.svg', 24)
+      .iconSet('communication', 'icons/14a6ec88.communication-icons.svg', 24)
+      .iconSet('content', 'icons/d73de9e3.content-icons.svg', 24)
+      .iconSet('device', 'icons/98f8d921.device-icons.svg', 24)
+      .iconSet('editor', 'icons/bbf5607a.editor-icons.svg', 24)
+      .iconSet('file', 'icons/96f6b24b.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/90548e26.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
-      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
-      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/a0577dd0.image-icons.svg', 24)
+      .iconSet('maps', 'icons/ea99afd9.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/9edaa8f8.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/80d43d2a.notification-icons.svg', 24)
+      .iconSet('social', 'icons/39ce2056.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/a0cd50cd.toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -390,6 +386,35 @@ angular.module('gestigris-common')
     $mdThemingProvider.definePalette('orangeGris', orangeGris);
     $mdThemingProvider.definePalette('redGris', redGris);
 
+  }]);
+
+'use strict';
+
+angular.module('users')
+  .config(['$stateProvider', function ($stateProvider) {
+
+    $stateProvider.
+
+    state('login', {
+      url: '/connexion',
+      templateUrl: 'modules/users/views/login.form.html',
+      controller: 'LoginController',
+      controllerAs: 'loginCtrl'
+    });
+  }]);
+
+'use strict';
+
+angular.module('users').controller('LoginController',
+  ['$scope', '$state', function ($scope, $state) {
+
+    this.handleLogin = function (loginForm, credentials) {
+      $scope.signin(loginForm, credentials);
+    };
+
+    this.handleLogedIn = function () {
+      $state.go('interventions');
+    };
   }]);
 
 'use strict';
@@ -485,6 +510,11 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
 
   $templateCache.put('modules/users/views/avatar.html',
     "<div><md-icon ng-if=!hasImage md-svg-icon=action:face alt=user.toString()><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></md-icon><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div></div>"
+  );
+
+
+  $templateCache.put('modules/users/views/login.form.html',
+    "<md-card login signin-form flex layout-padding><form name=loginForm novalidate ng-submit=\"loginCtrl.handleLogin(loginForm, credentials)\"><md-card-title><md-card-title-text><span class=md-headline>Interventions</span> <span class=md-subhead>Beta 1</span><div style=margin-top:50px><md-input-container class=\"md-icon-float md-block\" md-is-error=\"loginForm.$submitted && (loginForm.userName.$error.required || loginForm.userName.$error.email)\"><label translate=LOGIN_FORM.EMAIL.DESCRIPTION></label><md-icon md-svg-icon=communication:mail_outline></md-icon><input flex type=email name=userName required ng-focus=loginForm.$setPristine() ng-model=credentials.username><div ng-messages=loginForm.userName.$error><div ng-message=required><span translate=LOGIN_FORM.EMAIL.ERRORS.REQUIRED></span></div><div ng-message=email><span translate=LOGIN_FORM.EMAIL.ERRORS.INVALID></span></div></div></md-input-container><md-input-container class=\"md-icon-float md-block\" ng-hide=isResetingPassword md-is-error=\"loginForm.$submitted && loginForm.password.$error.required\"><label translate=LOGIN_FORM.PASSWORD.DESCRIPTION></label><md-icon md-svg-icon=action:lock_outline></md-icon><input flex type=password name=password ng-required=!isResetingPassword ng-model=credentials.password><div ng-messages=loginForm.password.$error ng-show=\"loginForm.password.$touched || loginForm.$submitted\"><div ng-message=required><span translate=LOGIN_FORM.PASSWORD.ERRORS.REQUIRED></span></div></div></md-input-container><div ng-show=\"isResetingPassword && loginForm.$submitted && loginForm.$valid\">{{ passwordResetMessage }}</div></div></md-card-title-text><md-card-title-media><div class=\"md-media-lg card-media\" style=width:250px><img ng-src=/img/logopng.png alt=\"Logo Gris-Québec\"></div></md-card-title-media></md-card-title><md-card-actions layout=row layout-align=\"end center\"><md-button flex=33 class=\"md-raised md-primary\" flex type=submit ng-disabled=isResetingPassword aria-label=\"{{'LOGIN_FORM.BUTTONS.SIGN_IN' | translate}}\" translate=LOGIN_FORM.BUTTONS.SIGN_IN></md-button></md-card-actions></form></md-card>"
   );
 
 }]);
