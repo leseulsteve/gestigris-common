@@ -23,7 +23,7 @@ angular.module('gestigris-common').directive('etablissementImage',
           }
         }
 
-        var unwatch = scope.$watch(attrs.etablissementId, function (etablissementId) {
+        scope.$watch(attrs.etablissementId, function (etablissementId) {
           if (!_.isUndefined(etablissementId)) {
 
             scope.etablissement = etablissements[etablissementId];
@@ -37,20 +37,17 @@ angular.module('gestigris-common').directive('etablissementImage',
             } else {
               setImage();
             }
-
-            unwatch();
           }
         });
 
-        var unwatch2 = scope.$watch(attrs.etablissement, function (etablissement) {
+        scope.$watch(attrs.etablissement, function (etablissement) {
           if (!_.isUndefined(etablissement)) {
 
             etablissements[etablissement._id] = etablissement;
-            scope.etablissement = etablissement;
+          //  scope.etablissement = etablissement;
 
             setImage();
 
-            unwatch2();
           }
         });
       }
