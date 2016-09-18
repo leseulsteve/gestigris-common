@@ -21,7 +21,7 @@ angular.module('gestigris-common').directive('etablissementMap',
                 etablissement: {
                   lat: etablissement.coordinates.lat,
                   lng: etablissement.coordinates.long,
-                  message: etablissement.address.street,
+                  message: '<div class="md-title">' + etablissement.toString() + '</div>' + etablissement.address.street,
                   focus: true,
                   draggable: false
                 }
