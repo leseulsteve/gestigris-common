@@ -19,4 +19,8 @@ angular.module('gestigris-common')
     $mdThemingProvider.definePalette('orangeGris', orangeGris);
     $mdThemingProvider.definePalette('redGris', redGris);
 
+    $mdThemingProvider.theme('default')
+      .primaryPalette('vertGris')
+      .accentPalette('orangeGris')
+      .warnPalette('redGris');
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gestigris-common').directive('etablissementMap',
-  function ($timeout, leafletData) {
+  function () {
     return {
       restrict: 'E',
       scope: true,
@@ -9,15 +9,15 @@ angular.module('gestigris-common').directive('etablissementMap',
       templateUrl: 'modules/etablissements/views/etablissement.map.html',
       link: function (scope, element, attrs) {
 
-        scope.$watch(attrs.etablissement, function(etablissement) {
-        if (!_.isUndefined(etablissement.coordinates)) {
-          angular.extend(scope, {
-            center: {
-              lat: etablissement.coordinates.lat,
-              lng: etablissement.coordinates.long,
-              zoom: 15
-            },
-            markers:{
+        scope.$watch(attrs.etablissement, function (etablissement) {
+          if (!_.isUndefined(etablissement.coordinates)) {
+            angular.extend(scope, {
+              center: {
+                lat: etablissement.coordinates.lat,
+                lng: etablissement.coordinates.long,
+                zoom: 15
+              },
+              markers: {
                 etablissement: {
                   lat: etablissement.coordinates.lat,
                   lng: etablissement.coordinates.long,
@@ -26,14 +26,14 @@ angular.module('gestigris-common').directive('etablissementMap',
                   draggable: false
                 }
               }
-          });
-          /*leafletData.getMap().then(function(map) {
-            $timeout(function() {
-             // map.invalidateSize();
             });
-          });*/
-        }
-      }, true);
+            /*leafletData.getMap().then(function(map) {
+              $timeout(function() {
+               // map.invalidateSize();
+              });
+            });*/
+          }
+        }, true);
       }
     };
   });
