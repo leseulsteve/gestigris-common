@@ -141,54 +141,13 @@ angular.module('gestigris-common').service('Moment',
 
 'use strict';
 
-angular.module('gestigris-common').factory('Pays',
-  ['$q', function ($q) {
-
-    var Pays = function (params) {
-      _.assign(this, params);
-    };
-
-    Pays.prototype.toString = function () {
-      return this.name;
-    };
-
-    Pays.find = function () {
-      var deffered = $q.defer();
-      deffered.resolve(_.map([{
-        _id: '578bc96bd8916725bb4df182',
-        name: 'Canada'
-      }], function (params) {
-        return new Pays(params);
-      }));
-      return deffered.promise;
-    };
-
-    return Pays;
-
-  }]);
-
-'use strict';
-
 angular.module('gestigris-common').factory('Province',
-  ['$q', function ($q) {
+  ['Schema', function (Schema) {
 
-    var Province = function (params) {
-      _.assign(this, params);
-    };
+    var Province = new Schema('adresse/province');
 
     Province.prototype.toString = function () {
       return this.name;
-    };
-
-    Province.find = function () {
-      var deffered = $q.defer();
-      deffered.resolve(_.map([{
-        _id: '578bc96bd8916725bb4df181',
-        name: 'Québec'
-      }], function (params) {
-        return new Province(params);
-      }));
-      return deffered.promise;
     };
 
     return Province;
@@ -221,25 +180,12 @@ angular.module('gestigris-common').service('Toast',
 'use strict';
 
 angular.module('gestigris-common').factory('Ville',
-  ['$q', function ($q) {
+  ['Schema', function (Schema) {
 
-    var Ville = function (params) {
-      _.assign(this, params);
-    };
+    var Ville = new Schema('adresse/ville');
 
     Ville.prototype.toString = function () {
       return this.name;
-    };
-
-    Ville.find = function () {
-      var deffered = $q.defer();
-      deffered.resolve(_.map([{
-        _id: '578bc96bd8916725bb5df181',
-        name: 'Ville de Québec'
-      }], function (params) {
-        return new Ville(params);
-      }));
-      return deffered.promise;
     };
 
     return Ville;
