@@ -10,7 +10,7 @@ angular.module('gestigris-common').directive('etablissementMap',
       link: function (scope, element, attrs) {
 
         scope.$watch(attrs.etablissement, function (etablissement) {
-          if (!_.isUndefined(etablissement.coordinates)) {
+          if (etablissement && !_.isUndefined(etablissement.coordinates)) {
             angular.extend(scope, {
               center: {
                 lat: etablissement.coordinates.lat,

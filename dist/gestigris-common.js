@@ -118,6 +118,22 @@ angular.module('gestigris-common').directive('grisLogo',
 
 'use strict';
 
+angular.module('gestigris-common').directive('keepLineBreaks',
+  function () {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function (scope, element, attrs, ngModelController) {
+
+        ngModelController.$parsers.push(function (value) {
+          return value.replace(/\r?\n/g, '<br />');
+        });
+      }
+    };
+  });
+
+'use strict';
+
 angular.module('gestigris-common').factory('Arrondissement',
   ['Schema', function (Schema) {
 
@@ -204,7 +220,7 @@ angular.module('gestigris-common').directive('etablissementMap',
       link: function (scope, element, attrs) {
 
         scope.$watch(attrs.etablissement, function (etablissement) {
-          if (!_.isUndefined(etablissement.coordinates)) {
+          if (etablissement && !_.isUndefined(etablissement.coordinates)) {
             angular.extend(scope, {
               center: {
                 lat: etablissement.coordinates.lat,
@@ -424,11 +440,6 @@ angular.module('gestigris-common').directive('avatar',
   }]);
 angular.module('gestigris-common').run(['$templateCache', function($templateCache) {
   'use strict';
-
-  $templateCache.put('modules/etablissements/views/etablissement.image.html',
-    "<img ng-show=image ng-src=\"{{ image }}\" alt=\"{{ etablissement.toString() }}\" style=height:200px><div ng-show=!image layout=column layout-align=\"center center\" style=height:200px><p class=md-headline style=\"text-align: center\">{{ etablissement.toString() }}</p></div>"
-  );
-
 
   $templateCache.put('modules/etablissements/views/etablissement.map.html',
     "<leaflet ng-if=center markers=markers lf-center=center></leaflet>"
