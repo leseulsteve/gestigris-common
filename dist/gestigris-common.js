@@ -10,7 +10,8 @@ angular.module('gestigris-common', [
   'leseulsteve.angular-user-auth',
   'pascalprecht.translate',
   'leaflet-directive',
-  'btford.socket-io'
+  'btford.socket-io',
+  'ngLetterAvatar'
 ]);
 
 'use strict';
