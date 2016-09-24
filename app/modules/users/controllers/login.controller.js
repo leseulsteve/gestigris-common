@@ -9,8 +9,4 @@ angular.module('gestigris-common').controller('LoginController',
     this.handleLogin = function (loginForm, credentials) {
       $scope.signin(loginForm, credentials);
     };
-
-    this.handleLogedIn = function () {
-      $state.go('interventions');
-    };
   });

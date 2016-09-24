@@ -228,62 +228,6 @@ angular.module('gestigris-common').factory('Ville',
 
 'use strict';
 
-angular.module('gestigris-common').directive('etablissementImage',
-  ['Etablissement', function (Etablissement) {
-
-    var etablissements = {};
-
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/etablissements/views/etablissement.image.html',
-      link: function (scope, element, attrs) {
-
-        function setImage() {
-          scope.image = scope.etablissement.getImageUrl();
-          if (scope.image) {
-            var imageElement = element.find('img');
-            imageElement.bind('load', function () {
-              scope.$broadcast('imageLoaded');
-              scope.$apply();
-            });
-          } else {
-            scope.$broadcast('imageLoaded');
-          }
-        }
-
-        scope.$watch(attrs.etablissementId, function (etablissementId) {
-          if (!_.isUndefined(etablissementId)) {
-
-            scope.etablissement = etablissements[etablissementId];
-
-            if (_.isUndefined(scope.etablissement)) {
-              Etablissement.findById(etablissementId).then(function (etablissement) {
-                scope.etablissement = etablissement;
-                setImage();
-                etablissements[etablissementId] = etablissement;
-              });
-            } else {
-              setImage();
-            }
-          }
-        });
-
-        scope.$watch(attrs.etablissement, function (etablissement) {
-          if (!_.isUndefined(etablissement)) {
-
-            etablissements[etablissement._id] = etablissement;
-            //  scope.etablissement = etablissement;
-
-            setImage();
-
-          }
-        });
-      }
-    };
-  }]);
-
-'use strict';
-
 angular.module('gestigris-common').directive('etablissementMap',
   function () {
     return {
@@ -305,7 +249,7 @@ angular.module('gestigris-common').directive('etablissementMap',
                 etablissement: {
                   lat: etablissement.coordinates.lat,
                   lng: etablissement.coordinates.long,
-                  message: etablissement.address.street,
+                  message: '<div class="md-title">' + etablissement.toString() + '</div>' + etablissement.address.street,
                   focus: true,
                   draggable: false
                 }
@@ -432,10 +376,6 @@ angular.module('gestigris-common').controller('LoginController',
     this.handleLogin = function (loginForm, credentials) {
       $scope.signin(loginForm, credentials);
     };
-
-    this.handleLogedIn = function () {
-      $state.go('interventions');
-    };
   }]);
 
 'use strict';
@@ -535,7 +475,7 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
 
 
   $templateCache.put('modules/users/views/login.form.html',
-    "<md-card login signin-form flex layout-padding><form name=loginForm novalidate ng-submit=\"loginCtrl.handleLogin(loginForm, credentials)\"><md-card-title><md-card-title-text><span class=md-headline>{{ appName }}</span> <span class=md-subhead>Beta 1</span><div style=margin-top:50px><md-input-container class=\"md-icon-float md-block\" md-is-error=\"loginForm.$submitted && (loginForm.userName.$error.required || loginForm.userName.$error.email)\"><label translate=LOGIN_FORM.EMAIL.DESCRIPTION></label><md-icon md-svg-icon=communication:mail_outline></md-icon><input flex type=email name=userName required ng-focus=loginForm.$setPristine() ng-model=credentials.username><div ng-messages=loginForm.userName.$error><div ng-message=required><span translate=LOGIN_FORM.EMAIL.ERRORS.REQUIRED></span></div><div ng-message=email><span translate=LOGIN_FORM.EMAIL.ERRORS.INVALID></span></div></div></md-input-container><md-input-container class=\"md-icon-float md-block\" ng-hide=isResetingPassword md-is-error=\"loginForm.$submitted && loginForm.password.$error.required\"><label translate=LOGIN_FORM.PASSWORD.DESCRIPTION></label><md-icon md-svg-icon=action:lock_outline></md-icon><input flex type=password name=password ng-required=!isResetingPassword ng-model=credentials.password><div ng-messages=loginForm.password.$error ng-show=\"loginForm.password.$touched || loginForm.$submitted\"><div ng-message=required><span translate=LOGIN_FORM.PASSWORD.ERRORS.REQUIRED></span></div></div></md-input-container><div ng-show=\"isResetingPassword && loginForm.$submitted && loginForm.$valid\">{{ passwordResetMessage }}</div></div></md-card-title-text><md-card-title-media><div class=\"md-media-lg card-media\" style=width:250px><gris-logo></gris-logo></div></md-card-title-media></md-card-title><md-card-actions layout=row layout-align=\"end center\"><md-button flex=33 class=\"md-raised md-primary\" flex type=submit ng-disabled=isResetingPassword aria-label=\"{{'LOGIN_FORM.BUTTONS.SIGN_IN' | translate}}\" translate=LOGIN_FORM.BUTTONS.SIGN_IN></md-button></md-card-actions></form></md-card>"
+    "<md-card login signin-form flex layout-padding><form name=loginForm novalidate ng-submit=\"loginCtrl.handleLogin(loginForm, credentials)\"><md-card-title><md-card-title-text><span class=md-headline>{{ appName }}</span> <span class=md-subhead>{{ appVersion }}</span><div style=margin-top:50px><md-input-container class=\"md-icon-float md-block\" md-is-error=\"loginForm.$submitted && (loginForm.userName.$error.required || loginForm.userName.$error.email)\"><label translate=LOGIN_FORM.EMAIL.DESCRIPTION></label><md-icon md-svg-icon=communication:mail_outline></md-icon><input flex type=email name=userName required ng-focus=loginForm.$setPristine() ng-model=credentials.username><div ng-messages=loginForm.userName.$error><div ng-message=required><span translate=LOGIN_FORM.EMAIL.ERRORS.REQUIRED></span></div><div ng-message=email><span translate=LOGIN_FORM.EMAIL.ERRORS.INVALID></span></div></div></md-input-container><md-input-container class=\"md-icon-float md-block\" ng-hide=isResetingPassword md-is-error=\"loginForm.$submitted && loginForm.password.$error.required\"><label translate=LOGIN_FORM.PASSWORD.DESCRIPTION></label><md-icon md-svg-icon=action:lock_outline></md-icon><input flex type=password name=password ng-required=!isResetingPassword ng-model=credentials.password><div ng-messages=loginForm.password.$error ng-show=\"loginForm.password.$touched || loginForm.$submitted\"><div ng-message=required><span translate=LOGIN_FORM.PASSWORD.ERRORS.REQUIRED></span></div></div></md-input-container><div ng-show=\"isResetingPassword && loginForm.$submitted && loginForm.$valid\">{{ passwordResetMessage }}</div></div></md-card-title-text><md-card-title-media><div class=\"md-media-lg card-media\" style=width:250px><gris-logo></gris-logo></div></md-card-title-media></md-card-title><md-card-actions layout=row layout-align=\"end center\"><md-button flex=33 class=\"md-raised md-primary\" flex type=submit ng-disabled=isResetingPassword aria-label=\"{{'LOGIN_FORM.BUTTONS.SIGN_IN' | translate}}\" translate=LOGIN_FORM.BUTTONS.SIGN_IN></md-button></md-card-actions></form></md-card>"
   );
 
 }]);
