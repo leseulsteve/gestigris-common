@@ -1,7 +1,8 @@
 <div>
-	<md-icon ng-if="!hasImage" md-svg-icon="action:face" alt="user.toString()">
+	<ng-letter-avatar ng-if=!hasImage shape="round" dynamic="true" data="{{ user.toString() }}"></ng-letter-avatar>
+	<!--<md-icon ng-if="!hasImage" md-svg-icon="action:face" alt="user.toString()">
  		<md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
-	</md-icon>
+	</md-icon>-->
 	<div ng-if="hasImage">
  		<img ng-src="{{ user.avatar }}" alt="{{ user.toString() }}"/>
  		<md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
