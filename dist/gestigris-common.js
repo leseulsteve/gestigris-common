@@ -17,7 +17,7 @@ angular.module('gestigris-common', [
 'use strict';
 
 angular.module('gestigris-common').config(
-  ['$urlRouterProvider', '$httpProvider', function ($urlRouterProvider, $httpProvider) {
+  ['$urlRouterProvider', '$httpProvider', 'API_URL', function ($urlRouterProvider, $httpProvider, API_URL) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -25,8 +25,7 @@ angular.module('gestigris-common').config(
       return {
         'request': function (config) {
           if (!_.endsWith(config.url, '.html') && !_.endsWith(config.url, '.json') &&  !_.startsWith(config.url, 'http')) {
-            //var urlPrefix = 'http://vps54578.vps.ovh.ca:90',
-            var urlPrefix = 'http://localhost:9011';
+            var urlPrefix = API_URL;
 
             if (!_.startsWith(config.url, 'photon')) {
 
@@ -60,6 +59,7 @@ angular.module('gestigris-common').run(
 
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.error('$stateChangeError: ', toState, error);
+      $rootScope.loadingRoute = false;
     });
 
     $rootScope.$on('$stateChangeStart', function () {
@@ -113,7 +113,7 @@ angular.module('gestigris-common').directive('grisLogo',
   function () {
     return {
       restrict: 'E',
-      template: '<img src="img/509ceaee.logopng.png" alt="Logo Gris-Québec"/>'
+      template: '<img src="img/0890b3b0.logopng.png" alt="Logo Gris-Québec"/>'
     };
   });
 
@@ -251,16 +251,16 @@ angular.module('gestigris-common').directive('etablissementMap',
 
 'use strict';
 
-angular.module('gestigris-common').factory('ComissionScolaire',
+angular.module('gestigris-common').factory('CommissionScolaire',
   ['Schema', function (Schema) {
 
-    var ComissionScolaire = new Schema('comission-scolaire');
+    var CommissionScolaire = new Schema('commission-scolaire');
 
-    ComissionScolaire.prototype.toString = function () {
+    CommissionScolaire.prototype.toString = function () {
       return this.name;
     };
 
-    return ComissionScolaire;
+    return CommissionScolaire;
 
   }]);
 
@@ -303,22 +303,22 @@ angular.module('gestigris-common').factory('Etablissement',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/99632812.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3d062121.alert-icons.svg', 24)
-      .iconSet('av', 'icons/12727965.av-icons.svg', 24)
-      .iconSet('communication', 'icons/14a6ec88.communication-icons.svg', 24)
-      .iconSet('content', 'icons/d73de9e3.content-icons.svg', 24)
-      .iconSet('device', 'icons/98f8d921.device-icons.svg', 24)
-      .iconSet('editor', 'icons/bbf5607a.editor-icons.svg', 24)
-      .iconSet('file', 'icons/96f6b24b.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/90548e26.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
+      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
+      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
+      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
+      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
+      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
+      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/a0577dd0.image-icons.svg', 24)
-      .iconSet('maps', 'icons/ea99afd9.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/9edaa8f8.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/80d43d2a.notification-icons.svg', 24)
-      .iconSet('social', 'icons/39ce2056.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/a0cd50cd.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
+      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
+      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -463,7 +463,7 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
 
 
   $templateCache.put('modules/users/views/avatar.html',
-    "<div><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div></div>"
+    "<div><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"></div><div layout=row layout-align=\"center center\" style=position:absolute;top:58px><div class=\"md-whiteframe-3dp md-caption\" style=\"z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial\">{{ user.getRoleDescription() }}</div></div><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div>"
   );
 
 
