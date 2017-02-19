@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('gestigris-common').config(
-  function ($urlRouterProvider, $httpProvider) {
+  function ($urlRouterProvider, $httpProvider, API_URL) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -9,8 +9,7 @@ angular.module('gestigris-common').config(
       return {
         'request': function (config) {
           if (!_.endsWith(config.url, '.html') && !_.endsWith(config.url, '.json') &&  !_.startsWith(config.url, 'http')) {
-            //var urlPrefix = 'http://vps54578.vps.ovh.ca:90',
-            var urlPrefix = 'http://localhost:9011';
+            var urlPrefix = API_URL;
 
             if (!_.startsWith(config.url, 'photon')) {
 
