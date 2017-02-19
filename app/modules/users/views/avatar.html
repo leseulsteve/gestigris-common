@@ -1,10 +1,10 @@
 <div>
 	<ng-letter-avatar ng-if=!hasImage shape="round" dynamic="true" data="{{ user.toString() }}"></ng-letter-avatar>
-	<!--<md-icon ng-if="!hasImage" md-svg-icon="action:face" alt="user.toString()">
- 		<md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
-	</md-icon>-->
 	<div ng-if="hasImage">
  		<img ng-src="{{ user.avatar }}" alt="{{ user.toString() }}"/>
- 		<md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
  	</div>
+  <div layout="row" layout-align="center center" style="position:absolute;top:58px">
+    <div class="md-whiteframe-3dp md-caption" style="z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial;">{{ user.getRoleDescription() }}</div>
+  </div>
+  <md-tooltip ng-if="user._id !== currentUser._id">{{ user.toString() }}</md-tooltip>
 </div>
