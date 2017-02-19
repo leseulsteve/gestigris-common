@@ -31,7 +31,7 @@ angular.module('gestigris-common').config(
 
               var route = config.url.split('/')[config.url.split('/').length - 2];
 
-              if (!_.includes(['img', 'icons', '/'], route) && !_.endsWith(config.url, 'md-close.svg') && !_.endsWith(config.url, 'md-tabs-arrow.svg')) {
+              if (!_.includes(['img', 'icons', '/'], route) && !_.endsWith(config.url, 'md-close.svg') && !_.endsWith(config.url, 'md-tabs-arrow.svg') && !_.endsWith(config.url, 'md-calendar.svg')) {
                 urlPrefix += '/api/v1';
                 config.url = urlPrefix + '/' + config.url;
               }
@@ -463,7 +463,7 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
 
 
   $templateCache.put('modules/users/views/avatar.html',
-    "<div><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"></div><div layout=row layout-align=\"center center\" style=position:absolute;top:58px><div class=\"md-whiteframe-3dp md-caption\" style=\"z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial\">{{ user.getRoleDescription() }}</div></div><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div>"
+    "<div style=position:relative><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"></div><div layout=row layout-align=\"center center\" style=position:absolute;top:56px><div class=\"md-whiteframe-3dp md-caption\" style=\"z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial\">{{ user.getRoleDescription() }}</div></div><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div>"
   );
 
 

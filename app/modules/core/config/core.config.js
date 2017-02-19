@@ -15,7 +15,7 @@ angular.module('gestigris-common').config(
 
               var route = config.url.split('/')[config.url.split('/').length - 2];
 
-              if (!_.includes(['img', 'icons', '/'], route) && !_.endsWith(config.url, 'md-close.svg') && !_.endsWith(config.url, 'md-tabs-arrow.svg')) {
+              if (!_.includes(['img', 'icons', '/'], route) && !_.endsWith(config.url, 'md-close.svg') && !_.endsWith(config.url, 'md-tabs-arrow.svg') && !_.endsWith(config.url, 'md-calendar.svg')) {
                 urlPrefix += '/api/v1';
                 config.url = urlPrefix + '/' + config.url;
               }
