@@ -18,7 +18,9 @@ angular.module('gestigris-common').directive('avatar',
           iElement.css('cursor', 'pointer');
         }
 
-        return function link(scope, element) {
+        return function link(scope, element, attrs) {
+
+          scope.showRole = _.isUndefined(attrs.noRole);
 
           scope.$watch('user', function (user) {
             if (user) {
@@ -26,7 +28,13 @@ angular.module('gestigris-common').directive('avatar',
             }
           }, true);
 
-          if (!_.isUndefined(iAttrs.clickToUpdate)) {
+          if (_.isUndefined(iAttrs.clickToUpdate)) {
+
+            scope.tooltipText = scope.user.toString();
+
+          } else {
+
+            scope.tooltipText = 'Cliquez pour changer';
 
             var fileInput = element.find('input');
 
@@ -70,7 +78,6 @@ angular.module('gestigris-common').directive('avatar',
               reader.readAsDataURL($event.currentTarget.files[0]);
 
             });
-
           }
         };
       }

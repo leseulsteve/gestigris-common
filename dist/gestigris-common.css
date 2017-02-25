@@ -7,7 +7,7 @@ md-card[md-ink-ripple] {
 body.unauthenticated {
   margin: 0;
   padding: 0;
-  background: url("/img/0bdf1a12.home.jpeg") no-repeat center fixed;
+  background: url("/img/76648e34.home.jpeg") no-repeat center fixed;
   background-size: cover; }
 
 .ng-hide {
@@ -24,13 +24,13 @@ body.unauthenticated {
 
 @font-face {
   font-family: Brandon;
-  src: url("/fonts/81bf2ff3.Brandon_med.eot");
-  src: url("/fonts/32778040.Brandon_med.ttf") format("truetype"), url("/fonts/e5783747.Brandon_med.otf") format("opentype"); }
+  src: url("/fonts/7ed9f31f.Brandon_med.eot");
+  src: url("/fonts/c907fbfa.Brandon_med.ttf") format("truetype"), url("/fonts/0e05d4b0.Brandon_med.otf") format("opentype"); }
 @font-face {
   font-family: Brandon;
   font-weight: bold;
-  src: url("/fonts/7ba839ba.Brandon_bld.eot");
-  src: url("/fonts/6f94e4b9.Brandon_bld.ttf") format("truetype"), url("/fonts/39f9ea76.Brandon_bld.otf") format("opentype"); }
+  src: url("/fonts/c86ad52d.Brandon_bld.eot");
+  src: url("/fonts/fca6c57b.Brandon_bld.ttf") format("truetype"), url("/fonts/4da515df.Brandon_bld.otf") format("opentype"); }
 body {
   font-family: 'Brandon', serif; }
 

@@ -113,7 +113,7 @@ angular.module('gestigris-common').directive('grisLogo',
   function () {
     return {
       restrict: 'E',
-      template: '<img src="img/0890b3b0.logopng.png" alt="Logo Gris-Québec"/>'
+      template: '<img src="img/509ceaee.logopng.png" alt="Logo Gris-Québec"/>'
     };
   });
 
@@ -303,22 +303,22 @@ angular.module('gestigris-common').factory('Etablissement',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
-      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
-      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
-      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
-      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
-      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
-      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/99632812.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3d062121.alert-icons.svg', 24)
+      .iconSet('av', 'icons/12727965.av-icons.svg', 24)
+      .iconSet('communication', 'icons/14a6ec88.communication-icons.svg', 24)
+      .iconSet('content', 'icons/d73de9e3.content-icons.svg', 24)
+      .iconSet('device', 'icons/98f8d921.device-icons.svg', 24)
+      .iconSet('editor', 'icons/bbf5607a.editor-icons.svg', 24)
+      .iconSet('file', 'icons/96f6b24b.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/90548e26.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
-      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
-      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/a0577dd0.image-icons.svg', 24)
+      .iconSet('maps', 'icons/ea99afd9.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/9edaa8f8.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/80d43d2a.notification-icons.svg', 24)
+      .iconSet('social', 'icons/39ce2056.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/a0cd50cd.toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -396,7 +396,9 @@ angular.module('gestigris-common').directive('avatar',
           iElement.css('cursor', 'pointer');
         }
 
-        return function link(scope, element) {
+        return function link(scope, element, attrs) {
+
+          scope.showRole = _.isUndefined(attrs.noRole);
 
           scope.$watch('user', function (user) {
             if (user) {
@@ -404,7 +406,13 @@ angular.module('gestigris-common').directive('avatar',
             }
           }, true);
 
-          if (!_.isUndefined(iAttrs.clickToUpdate)) {
+          if (_.isUndefined(iAttrs.clickToUpdate)) {
+
+            scope.tooltipText = scope.user.toString();
+
+          } else {
+
+            scope.tooltipText = 'Cliquez pour changer';
 
             var fileInput = element.find('input');
 
@@ -448,7 +456,6 @@ angular.module('gestigris-common').directive('avatar',
               reader.readAsDataURL($event.currentTarget.files[0]);
 
             });
-
           }
         };
       }
@@ -462,8 +469,13 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
   );
 
 
+  $templateCache.put('modules/users/views/avatar.dialog.html',
+    "<md-dialog aria-label=\"Changement d'avatar\" style=width:550px;height:450px><md-dialog-content><div class=md-dialog-content><div class=crop-area><img-crop image=myImage result-image=myCroppedImage></img-crop></div></div></md-dialog-content><md-dialog-actions layout=row><md-button ng-click=cancel()>Annuler</md-button><md-button ng-click=change()>Changer</md-button></md-dialog-actions></md-dialog>"
+  );
+
+
   $templateCache.put('modules/users/views/avatar.html',
-    "<div style=position:relative><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"></div><div layout=row layout-align=\"center center\" style=position:absolute;top:56px><div class=\"md-whiteframe-3dp md-caption\" style=\"z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial\">{{ user.getRoleDescription() }}</div></div><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ user.toString() }}</md-tooltip></div>"
+    "<div style=position:relative><ng-letter-avatar ng-if=!hasImage shape=round dynamic=true data=\"{{ user.toString() }}\"></ng-letter-avatar><div ng-if=hasImage><img ng-src=\"{{ user.avatar }}\" alt=\"{{ user.toString() }}\"></div><div ng-if=showRole layout=row layout-align=\"center center\" style=position:absolute;top:56px><div class=\"md-whiteframe-3dp md-caption\" style=\"z-index:400;padding-right:4px;padding-left:4px;background:white;border-radius: initial\">{{ user.getRoleDescription() }}</div></div><md-tooltip ng-if=\"user._id !== currentUser._id\">{{ tooltipText }}</md-tooltip></div>"
   );
 
 

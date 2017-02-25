@@ -1,0 +1,17 @@
+<md-dialog aria-label="Changement d'avatar" style="width:550px;height:450px;">
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <div class="crop-area">
+        <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+      </div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+      Annuler
+    </md-button>
+    <md-button ng-click="change()">
+      Changer
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>
