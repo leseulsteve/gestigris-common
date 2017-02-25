@@ -14,7 +14,6 @@ angular.module('gestigris-common').directive('avatar',
 
         if (!_.isUndefined(iAttrs.clickToUpdate)) {
           iElement.append('<input style="display:none;" type="file"/>');
-          iElement.append('<div class="md-caption text-center">Cliquez pour changer</div>');
           iElement.css('cursor', 'pointer');
         }
 
@@ -50,6 +49,7 @@ angular.module('gestigris-common').directive('avatar',
               scope.myCroppedImage = '';
 
               reader.onload = function ($event) {
+
                 scope.$apply(function () {
                   scope.myImage = $event.target.result;
                 });
@@ -57,10 +57,11 @@ angular.module('gestigris-common').directive('avatar',
                 $mdDialog.show({
                   templateUrl: 'modules/users/views/avatar.dialog.html',
                   parent: angular.element(document.body),
-                  targetEvent: $event,
                   scope: scope,
                   preserveScope: true
                 });
+
+                fileInput[0].value = '';
 
                 scope.change = function () {
                   scope.user.avatar = scope.myCroppedImage;
