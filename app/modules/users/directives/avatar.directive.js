@@ -24,7 +24,6 @@ angular.module('gestigris-common').directive('avatar',
           scope.$watch('user', function (user) {
 
             if (user) {
-              scope.hasImage = !_.isUndefined(user.avatar);
 
               if (_.isUndefined(iAttrs.clickToUpdate)) {
 
