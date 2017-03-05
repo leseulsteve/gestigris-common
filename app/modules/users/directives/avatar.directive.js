@@ -81,6 +81,11 @@ angular.module('gestigris-common').directive('avatar',
             });
           }
         };
+      },
+      controller: function ($scope) {
+        this.getUser = function () {
+          return $scope.user;
+        };
       }
     };
   });
