@@ -21,6 +21,7 @@
   "dependencies": {
     "angular-sanitize": "~1.4.5",
     "angular-ui-router": "~0.2.15",
+    "angular-aria": "~1.4.14",
     "angular-user-auth": "git+https://github.com/leseulsteve/angular-user-auth.git",
     "angular-mongoose": "git+https://github.com/leseulsteve/angular-mongoose.git",
     "angular-messages": "~1.4.5",
