@@ -16,6 +16,15 @@ angular.module('gestigris-common', [
 
 'use strict';
 
+angular.module('gestigris-common').factory('Conversation',
+  ['Schema', function (Schema) {
+
+    return new Schema('conversation');
+
+  }]);
+
+'use strict';
+
 angular.module('gestigris-common').config(
   ['$urlRouterProvider', '$httpProvider', 'API_URL', function ($urlRouterProvider, $httpProvider, API_URL) {
 
@@ -295,6 +304,55 @@ angular.module('gestigris-common').factory('Etablissement',
     };
 
     return Etablissement;
+
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').factory('InterventionTag',
+  ['Schema', function (Schema) {
+
+    var InterventionTag = new Schema('intervention-tag');
+
+    InterventionTag.prototype.toString = function () {
+      return this.name;
+    };
+
+    return InterventionTag;
+
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').factory('Intervention',
+  ['Schema', function (Schema) {
+
+    return new Schema('intervention');
+
+  }]);
+
+'use strict';
+
+angular.module('gestigris-common').factory('PlageIntervention',
+  ['Schema', 'Moment', 'Intervention', 'Conversation', 'Etablissement', function (Schema, Moment, Intervention, Conversation, Etablissement) {
+
+    var PlageIntervention = new Schema('plage-intervention');
+
+    PlageIntervention.post('find', function (next) {
+      this.date = new Moment(this.date);
+      this.etablissement = new Etablissement(this.etablissement);
+      next();
+    });
+
+    PlageIntervention.prototype.getInterventions = function () {
+      return Intervention.findByPlageId(this._id);
+    };
+
+    PlageIntervention.prototype.getConversation = function () {
+      return Conversation.findById(this.conversation);
+    };
+
+    return PlageIntervention;
 
   }]);
 
