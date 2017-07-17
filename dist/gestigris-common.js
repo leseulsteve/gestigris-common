@@ -122,7 +122,7 @@ angular.module('gestigris-common').directive('grisLogo',
   function () {
     return {
       restrict: 'E',
-      template: '<img src="img/0890b3b0.logopng.png" alt="Logo Gris-Québec"/>'
+      template: '<img src="img/7c83b235.logopng.png" alt="Logo Gris-Québec"/>'
     };
   });
 
@@ -236,6 +236,10 @@ angular.module('gestigris-common').directive('etablissementMap',
                 lat: etablissement.coordinates.lat,
                 lng: etablissement.coordinates.long,
                 zoom: 15
+              },
+              defaults: {
+                dragging: 'dragging' in attrs ? scope.$eval(attrs.dragging) : true,
+                scrollWheelZoom: 'scrollWheelZoom' in attrs ? scope.$eval(attrs.scrollWheelZoom) : true
               },
               markers: {
                 etablissement: {
@@ -361,22 +365,22 @@ angular.module('gestigris-common').factory('PlageIntervention',
 angular.module('gestigris-common')
   .config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-      .iconSet('action', 'icons/2e79e525.action-icons.svg', 24)
-      .iconSet('alert', 'icons/3741059a.alert-icons.svg', 24)
-      .iconSet('av', 'icons/a38ceb29.av-icons.svg', 24)
-      .iconSet('communication', 'icons/bf15dd98.communication-icons.svg', 24)
-      .iconSet('content', 'icons/ab09cba1.content-icons.svg', 24)
-      .iconSet('device', 'icons/b9b28764.device-icons.svg', 24)
-      .iconSet('editor', 'icons/f52685d0.editor-icons.svg', 24)
-      .iconSet('file', 'icons/d2796357.file-icons.svg', 24)
-      .iconSet('hardware', 'icons/1f0d2702.hardware-icons.svg', 24)
+      .iconSet('action', 'icons/99632812.action-icons.svg', 24)
+      .iconSet('alert', 'icons/3d062121.alert-icons.svg', 24)
+      .iconSet('av', 'icons/12727965.av-icons.svg', 24)
+      .iconSet('communication', 'icons/14a6ec88.communication-icons.svg', 24)
+      .iconSet('content', 'icons/d73de9e3.content-icons.svg', 24)
+      .iconSet('device', 'icons/98f8d921.device-icons.svg', 24)
+      .iconSet('editor', 'icons/bbf5607a.editor-icons.svg', 24)
+      .iconSet('file', 'icons/96f6b24b.file-icons.svg', 24)
+      .iconSet('hardware', 'icons/90548e26.hardware-icons.svg', 24)
       .iconSet('icons', 'icons/icons-icons.svg', 24)
-      .iconSet('image', 'icons/2dd80997.image-icons.svg', 24)
-      .iconSet('maps', 'icons/b8bbfe80.maps-icons.svg', 24)
-      .iconSet('navigation', 'icons/2ce70a82.navigation-icons.svg', 24)
-      .iconSet('notification', 'icons/23324a04.notification-icons.svg', 24)
-      .iconSet('social', 'icons/301cdf30.social-icons.svg', 24)
-      .iconSet('toggle', 'icons/4e19389b.toggle-icons.svg', 24);
+      .iconSet('image', 'icons/a0577dd0.image-icons.svg', 24)
+      .iconSet('maps', 'icons/ea99afd9.maps-icons.svg', 24)
+      .iconSet('navigation', 'icons/9edaa8f8.navigation-icons.svg', 24)
+      .iconSet('notification', 'icons/80d43d2a.notification-icons.svg', 24)
+      .iconSet('social', 'icons/39ce2056.social-icons.svg', 24)
+      .iconSet('toggle', 'icons/a0cd50cd.toggle-icons.svg', 24);
   }]);
 
 'use strict';
@@ -410,30 +414,30 @@ angular.module('gestigris-common')
 
 angular.module('gestigris-common')
 
-  .run(['$rootScope', '$mdToast', '$state', '$log', function ($rootScope, $mdToast, $state, $log) {
-    $rootScope.$on('UserAuth:signin:success', function ($event, user) {
-      $mdToast.show(
-        $mdToast.simple()
-        .textContent('Bonjour ' + user.toString() + '!')
-      );
-      $state.go('home');
-    });
+.run(['$rootScope', '$mdToast', '$state', '$log', function ($rootScope, $mdToast, $state, $log) {
+  $rootScope.$on('UserAuth:signin:success', function ($event, user) {
+    $mdToast.show(
+      $mdToast.simple()
+      .textContent('Bonjour ' + user.toString() + '!')
+    );
+    $state.go('home');
+  });
 
-    $rootScope.$on('UserAuth:signin:fail', function ($event, response) {
+  $rootScope.$on('UserAuth:signin:fail', function ($event, response) {
 
-      var toast;
-      switch (response.code) {
-      case 'BadCredentials':
-        toast = $mdToast.simple()
-          .textContent('Utilisateur inexistant ou mauvais mot de passe');
-      }
-      if (toast) {
-        $mdToast.show(toast);
-      } else {
-        $log.error('UserAuth:signin:fail', response);
-      }
-    });
-  }]);
+    var toast;
+    switch (response.code) {
+    case 'BadCredentials':
+      toast = $mdToast.simple()
+        .textContent('Utilisateur inexistant ou mauvais mot de passe');
+    }
+    if (toast) {
+      $mdToast.show(toast);
+    } else {
+      $log.error('UserAuth:signin:fail', response);
+    }
+  });
+}]);
 
 'use strict';
 
@@ -575,7 +579,7 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
   'use strict';
 
   $templateCache.put('modules/etablissements/views/etablissement.map.html',
-    "<leaflet ng-if=center markers=markers lf-center=center></leaflet>"
+    "<leaflet ng-if=center markers=markers lf-center=center defaults=defaults></leaflet>"
   );
 
 
@@ -590,7 +594,7 @@ angular.module('gestigris-common').run(['$templateCache', function($templateCach
 
 
   $templateCache.put('modules/users/views/login.form.html',
-    "<md-card login signin-form flex layout-padding><form name=loginForm novalidate ng-submit=\"loginCtrl.handleLogin(loginForm, credentials)\"><md-card-title><md-card-title-text><span class=md-headline>{{ appName }}</span> <span class=md-subhead>{{ appVersion }}</span><div style=margin-top:50px><md-input-container class=\"md-icon-float md-block\" md-is-error=\"loginForm.$submitted && (loginForm.userName.$error.required || loginForm.userName.$error.email)\"><label translate=LOGIN_FORM.EMAIL.DESCRIPTION></label><md-icon md-svg-icon=communication:mail_outline></md-icon><input flex type=email name=userName required ng-focus=loginForm.$setPristine() ng-model=credentials.username><div ng-messages=loginForm.userName.$error><div ng-message=required><span translate=LOGIN_FORM.EMAIL.ERRORS.REQUIRED></span></div><div ng-message=email><span translate=LOGIN_FORM.EMAIL.ERRORS.INVALID></span></div></div></md-input-container><md-input-container class=\"md-icon-float md-block\" ng-hide=isResetingPassword md-is-error=\"loginForm.$submitted && loginForm.password.$error.required\"><label translate=LOGIN_FORM.PASSWORD.DESCRIPTION></label><md-icon md-svg-icon=action:lock_outline></md-icon><input flex type=password name=password ng-required=!isResetingPassword ng-model=credentials.password><div ng-messages=loginForm.password.$error ng-show=\"loginForm.password.$touched || loginForm.$submitted\"><div ng-message=required><span translate=LOGIN_FORM.PASSWORD.ERRORS.REQUIRED></span></div></div></md-input-container><div ng-show=\"isResetingPassword && loginForm.$submitted && loginForm.$valid\">{{ passwordResetMessage }}</div></div></md-card-title-text><md-card-title-media><div class=\"md-media-lg card-media\" style=width:250px><gris-logo></gris-logo></div></md-card-title-media></md-card-title><md-card-actions layout=row layout-align=\"end center\"><md-button flex=33 class=\"md-raised md-primary\" flex type=submit ng-disabled=isResetingPassword aria-label=\"{{'LOGIN_FORM.BUTTONS.SIGN_IN' | translate}}\" translate=LOGIN_FORM.BUTTONS.SIGN_IN></md-button></md-card-actions></form></md-card>"
+    "<md-card login signin-form flex layout-padding><form name=loginForm novalidate ng-submit=\"loginCtrl.handleLogin(loginForm, credentials)\"><md-card-title layout-xs=column><md-card-title-text layout-align=\"center start\"><span class=md-headline>{{ appName }}</span> <span class=md-subhead>{{ appVersion }}</span></md-card-title-text><md-card-title-media flex-order-xs=-1 style=\"height: 125px\"><div class=\"md-media-lg card-media\" style=width:250px><gris-logo></gris-logo></div></md-card-title-media></md-card-title><div ng-style=\"!$mdMedia('sm') && { 'margin-top' : '50px' }\"><md-input-container class=\"md-icon-float md-block\" style=margin-top:0 md-is-error=\"loginForm.$submitted && (loginForm.userName.$error.required || loginForm.userName.$error.email)\"><label translate=LOGIN_FORM.EMAIL.DESCRIPTION></label><md-icon md-svg-icon=communication:mail_outline></md-icon><input flex type=email name=userName required ng-focus=loginForm.$setPristine() ng-model=credentials.username><div ng-messages=loginForm.userName.$error><div ng-message=required><span translate=LOGIN_FORM.EMAIL.ERRORS.REQUIRED></span></div><div ng-message=email><span translate=LOGIN_FORM.EMAIL.ERRORS.INVALID></span></div></div></md-input-container><md-input-container class=\"md-icon-float md-block\" ng-hide=isResetingPassword md-is-error=\"loginForm.$submitted && loginForm.password.$error.required\"><label translate=LOGIN_FORM.PASSWORD.DESCRIPTION></label><md-icon md-svg-icon=action:lock_outline></md-icon><input flex type=password name=password ng-required=!isResetingPassword ng-model=credentials.password><div ng-messages=loginForm.password.$error ng-show=\"loginForm.password.$touched || loginForm.$submitted\"><div ng-message=required><span translate=LOGIN_FORM.PASSWORD.ERRORS.REQUIRED></span></div></div></md-input-container><div ng-show=\"isResetingPassword && loginForm.$submitted && loginForm.$valid\">{{ passwordResetMessage }}</div></div><md-card-actions layout=row layout-align=\"end center\"><md-button flex-gt-xs=33 class=\"md-raised md-primary\" flex type=submit ng-disabled=isResetingPassword aria-label=\"{{'LOGIN_FORM.BUTTONS.SIGN_IN' | translate}}\" translate=LOGIN_FORM.BUTTONS.SIGN_IN></md-button></md-card-actions></form></md-card>"
   );
 
 }]);

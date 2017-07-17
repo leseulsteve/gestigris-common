@@ -17,6 +17,10 @@ angular.module('gestigris-common').directive('etablissementMap',
                 lng: etablissement.coordinates.long,
                 zoom: 15
               },
+              defaults: {
+                dragging: 'dragging' in attrs ? scope.$eval(attrs.dragging) : true,
+                scrollWheelZoom: 'scrollWheelZoom' in attrs ? scope.$eval(attrs.scrollWheelZoom) : true
+              },
               markers: {
                 etablissement: {
                   lat: etablissement.coordinates.lat,
